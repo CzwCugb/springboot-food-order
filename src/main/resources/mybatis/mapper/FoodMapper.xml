@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chen.foodsystem.mapper.FoodMapper">
+
+    <!-- 查询所有食品 -->
+    <select id="findAllFoods" resultType="com.chen.foodsystem.pojo.Food">
+        SELECT * FROM Food
+    </select>
+
+    <!-- 根据ID查询单个食品 -->
+    <select id="findFoodById" parameterType="int" resultType="com.chen.foodsystem.pojo.Food">
+        SELECT * FROM Food WHERE FoodID = #{foodID}
+    </select>
+
+    <!-- 插入新食品 -->
+    <insert id="insertFood" parameterType="com.chen.foodsystem.pojo.Food">
+        INSERT INTO Food (Name, Description, Price, Image, Available)
+        VALUES (#{name}, #{description}, #{price}, #{image}, #{available})
+    </insert>
+
+    <!-- 更新食品信息 -->
+    <update id="updateFood" parameterType="com.chen.foodsystem.pojo.Food">
+        UPDATE Food
+        SET Name = #{name},
+        Description = #{description},
+        Price = #{price},
+        Image = #{image},
+        Available = #{available}
+        WHERE FoodID = #{foodID}
+    </update>
+
+    <!-- 删除食品 -->
+    <delete id="deleteFood" parameterType="int">
+        DELETE FROM Food WHERE FoodID = #{foodID}
+    </delete>
+
+</mapper>

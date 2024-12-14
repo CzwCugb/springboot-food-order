@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chen.foodsystem.mapper.UserMapper">
+
+  <!-- 根据用户名查询用户 -->
+  <select id="findByUsername" parameterType="string" resultType="com.chen.foodsystem.pojo.User">
+    SELECT * FROM User WHERE Username = #{username}
+  </select>
+
+  <!-- 查询所有用户 -->
+  <select id="findAllUsers" resultType="com.chen.foodsystem.pojo.User">
+    SELECT * FROM User
+  </select>
+
+  <!-- 根据ID查询用户 -->
+  <select id="findUserById" parameterType="int" resultType="com.chen.foodsystem.pojo.User">
+    SELECT * FROM User WHERE UserID = #{userID}
+  </select>
+
+  <!-- 插入新用户 -->
+  <insert id="insertUser" parameterType="com.chen.foodsystem.pojo.User">
+    INSERT INTO User (Username, Password, Email, Phone, Role, CreatedAt)
+    VALUES (#{username}, #{password}, #{email}, #{phone}, #{role}, NOW())
+  </insert>
+
+  <!-- 更新用户信息 -->
+  <update id="updateUser" parameterType="com.chen.foodsystem.pojo.User">
+    UPDATE User
+    SET Username = #{username},
+    Password = #{password},
+    Email = #{email},
+    Phone = #{phone},
+    Role = #{role}
+    WHERE UserID = #{userID}
+  </update>
+
+  <!-- 删除用户 -->
+  <delete id="deleteUser" parameterType="int">
+    DELETE FROM User WHERE UserID = #{userID}
+  </delete>
+
+</mapper>

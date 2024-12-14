@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chen.foodsystem.mapper.OrderMapper">
+
+    <!-- 根据订单ID查询订单 -->
+    <select id="getOrderById" parameterType="long" resultType="com.chen.foodsystem.pojo.Order">
+        SELECT * FROM orders WHERE orderId = #{orderId}
+    </select>
+
+    <!-- 查询所有订单 -->
+    <select id="getAllOrders" resultType="com.chen.foodsystem.pojo.Order">
+        SELECT * FROM orders
+    </select>
+
+    <!-- 插入新订单 -->
+    <insert id="insertOrder" parameterType="com.chen.foodsystem.pojo.Order" useGeneratedKeys="true" keyProperty="orderId">
+        INSERT INTO orders (customerName, foodName, quantity, price, status)
+        VALUES (#{customerName}, #{foodName}, #{quantity}, #{price}, #{status})
+    </insert>
+
+    <!-- 更新订单信息 -->
+    <update id="updateOrder" parameterType="com.chen.foodsystem.pojo.Order">
+        UPDATE orders
+        SET customerName = #{customerName},
+        foodName = #{foodName},
+        quantity = #{quantity},
+        price = #{price},
+        status = #{status}
+        WHERE orderId = #{orderId}
+    </update>
+
+    <!-- 删除订单 -->
+    <delete id="deleteOrder" parameterType="long">
+        DELETE FROM orders WHERE orderId = #{orderId}
+    </delete>
+
+</mapper>
