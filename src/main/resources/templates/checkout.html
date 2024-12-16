@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>结算页面</title>
+    <link rel="stylesheet" href="/css/checkout.css">
+</head>
+<body>
+<header>
+    <h2>结算</h2>
+</header>
+
+<div class="checkout-container">
+    <div class="order-summary">
+        <h3>订单详情</h3>
+        <p>商品总数:<span th:text = "${itemSum}">0</span> 件</p>
+        <p>总价: <span th:text = "${totalPrice}">0.00</span> 元</p>
+    </div>
+
+    <div class="payment-method">
+        <h3>选择支付方式</h3>
+        <div class="payment-option">
+            <label>
+                <input type="radio" name="payment-method" value="alipay" checked> 支付宝
+            </label>
+        </div>
+        <div class="payment-option">
+            <label>
+                <input type="radio" name="payment-method" value="wechat"> 微信支付
+            </label>
+        </div>
+    </div>
+
+    <div class="payment-button">
+        <button id="payButton" class="pay-btn">立即支付</button>
+    </div>
+</div>
+
+<script>
+    // 获取支付按钮元素
+    const payButton = document.getElementById('payButton');
+
+    payButton.addEventListener('click', function() {
+        // 获取选中的支付方式
+        const paymentMethod = document.querySelector('input[name="payment-method"]:checked').value;
+
+        // 判断是支付宝还是微信支付
+        if (paymentMethod === 'alipay') {
+            // 模拟支付宝支付流程
+            alert('正在使用支付宝支付...');
+        } else if (paymentMethod === 'wechat') {
+            // 模拟微信支付流程
+            alert('正在使用微信支付...');
+        }
+    });
+</script>
+
+</body>
+</html>

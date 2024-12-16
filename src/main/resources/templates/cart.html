@@ -2,9 +2,72 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>购物车</title>
+    <link rel="stylesheet" href="/css/cart.css">
 </head>
 <body>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<header>
+    <h2>购物车</h2>
+</header>
+
+<div class="cart-container">
+    <table class="cart-table">
+        <thead>
+        <tr>
+            <th>商品名称</th>
+            <th>数量</th>
+            <th>单价</th>
+            <th>小计</th>
+            <th>操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="item : ${cartItems}" th:data-user-id="${item.userID}" th:data-food-id="${item.foodID}">
+            <td th:text="${item.foodName}">商品名称</td>
+            <td>
+                <input type="number" th:value="${item.quantity}" min="1" class="quantity-input"/>
+            </td>
+            <td th:text="${item.price}">单价</td>
+            <td th:text="${item.price * item.quantity}">小计</td>
+            <td>
+                <form th:action="@{/cart/remove/{userID}/{foodID}(userID=${item.userID},foodID=${item.foodID})}" method = "post">
+                    <button type = "submit" class="remove-btn">移除</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <div class="cart-summary">
+        <p>总价: <span th:text="${totalPrice}" >0.00</span> 元</p>
+        <form th:action="@{/cart/{userID}/deleteAll(userID = ${session.loggedInUser.userID})}" method="post">
+            <button type="submit" class="checkout-btn" style="background-color:#ff6600">清空</button>
+        </form>
+        <form th:action="@{/checkout/{userID}(userID = ${session.loggedInUser.userID})}" method="post">
+            <button type="submit" class="checkout-btn">结算</button>
+        </form>
+    </div>
+
+</div>
+
+<script>
+
+    $('.quantity-input').on('input', function() {
+        var quantity = $(this).val();
+        var $tr = $(this).closest('tr'); // 获取当前的行
+        var userID = $tr.data('user-id'); // 获取行中的 userID
+        var foodID = $tr.data('food-id'); // 获取行中的 foodID
+        $.ajax({
+            url: '/cart/updateQuantity/' + userID + "/" + foodID + "/" + quantity,
+            method: 'POST',
+            success: function(response) {
+                window.location.href = '/cart/' + userID;
+            }
+        });
+    });
+</script>
 
 </body>
 </html>

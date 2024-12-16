@@ -1,10 +1,44 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="zh-CN">
 <head>
   <meta charset="UTF-8">
-  <title>Title</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title th:text="${food.name}">食品详情</title>
+  <link rel="stylesheet" href="/css/details.css">
 </head>
 <body>
+
+<header>
+  <div class="logo-container">
+    <h1>网上订餐系统</h1>
+  </div>
+</header>
+
+<!-- 商品详情区域 -->
+<section class="product-detail">
+  <div class="product-images">
+    <img th:src="@{'/images/food/' + ${food.image}}" alt="食品图片" class="main-img">
+  </div>
+
+  <div class="product-info">
+    <h2 th:text="${food.name}">食品名称</h2>
+    <p class="price" th:text="'价格: ¥' + ${food.price}">价格: ¥XX.XX</p>
+    <p class="description" th:text="${food.description}">食品描述</p>
+
+    <div class="add-to-cart">
+      <form th:if="${session.loggedInUser}" th:action="@{/cart/add/{userID}/{foodID}/{quantity}(foodID=${food.foodID}, userID=${session.loggedInUser.userID}, quantity=1)}" method="post">
+        <button type="submit" class="add-btn">加入购物车</button>
+      </form>
+      <form th:unless="${session.loggedInUser}" th:action="@{/login}" method="get">
+        <button type="submit" class="add-btn" style="background-color: gray">请先登录</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>&copy; 2024 网上订餐系统 | All Rights Reserved</p>
+</footer>
 
 </body>
 </html>

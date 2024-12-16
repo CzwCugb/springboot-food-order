@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chen.foodsystem.mapper.CartMapper">
+
+    <!-- 添加一个购物车项 -->
+    <insert id="addCartItem">
+        INSERT INTO Cart (UserID, FoodID, Quantity, Price, Name)
+        VALUES (#{userID}, #{foodID}, 1, #{price}, #{foodName})
+        ON DUPLICATE KEY UPDATE Quantity = Quantity + 1;
+    </insert>
+
+    <!-- 根据用户ID获取购物车项 -->
+    <select id="getCartItemByUserID" resultType="com.chen.foodsystem.pojo.CartItem">
+        SELECT c.UserID, c.FoodID, c.Quantity, c.Price, c.Name as foodName
+        FROM Cart c
+        WHERE c.UserID = #{userID}
+    </select>
+
+
+    <delete id="removeAllCartItemByUserID">
+        DELETE FROM Cart WHERE UserID = #{userID};
+    </delete>
+
+    <delete id="removeCartItemByKey">
+        DELETE FROM Cart
+        WHERE UserID = #{userID} AND FoodID = #{foodID};
+    </delete>
+
+    <update id="updateQuantityByKey">
+        UPDATE Cart SET Quantity = #{quantity}
+        WHERE UserID = #{userID} AND FoodID = #{foodID};
+    </update>
+
+</mapper>

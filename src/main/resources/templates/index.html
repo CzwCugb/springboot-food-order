@@ -3,72 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <title>网上订餐系统</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-        }
-        header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background-color: #f8f8f8;
-            padding: 1em;
-            border-bottom: 1px solid #ddd;
-        }
-        .auth-buttons a {
-            margin-left: 1em;
-            text-decoration: none;
-            color: #007bff;
-            font-weight: bold;
-        }
-        .food-container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            margin: 2em;
-        }
-        .food-item {
-            width: 45%;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            margin: 1em;
-            padding: 1em;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            text-align: center;
-        }
-        .food-item img {
-            max-width: 100%;
-            height: auto;
-            border-bottom: 1px solid #ddd;
-            margin-bottom: 1em;
-        }
-        .food-name {
-            font-size: 1.2em;
-            font-weight: bold;
-        }
-        .food-price {
-            color: #e74c3c;
-            font-weight: bold;
-        }
-    </style>
+    <link rel="stylesheet" href="/css/index.css">
 </head>
 <body>
 <header>
     <h2>网上订餐系统</h2>
     <div class="auth-buttons">
-        <a th:href="@{/login}">登录</a>
+        <a th:if="${session.loggedInUser}" th:href="@{/cart/{userID}(userID=${session.loggedInUser.userID})}">购物车</a>
+        <a th:if="${session.loggedInUser}" th:href="@{/login/logout}">退出</a>
+        <a th:unless="${session.loggedInUser}" th:href="@{/login}">登录</a>
+
         <a th:href="@{/register}">注册</a>
     </div>
 </header>
 
 <div class="food-container">
     <div class="food-item" th:each="food : ${foodList}">
-        <img th:src="@{'/img/' + ${food.image}}" alt="食品图片">
-        <div class="food-name" th:text="${food.name}">食品名称</div>
-        <div class="food-price" th:text="'价格: ¥' + ${food.price}">价格: ¥XX.XX</div>
+        <a th:href="@{'http://localhost:8080/food/' + ${food.foodID}}">
+            <img th:src="@{'/images/food/' + ${food.image}}" alt="食品图片">
+            <div class="food-name" th:text="${food.name}">食品名称</div>
+            <div class="food-price" th:text="'价格: ¥' + ${food.price}">价格: ¥XX.XX</div>
+            <div class="food-description" th:text="${food.description}">食品描述</div>
+        </a>
     </div>
 </div>
 </body>
+
+<footer>
+    <p>&copy; 2024 网上订餐系统 | All Rights Reserved</p>
+</footer>
+
 </html>

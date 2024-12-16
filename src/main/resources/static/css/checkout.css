@@ -1,0 +1,47 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #ff6600;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+}
+
+.checkout-container {
+    width: 80%;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.order-summary {
+    margin-bottom: 20px;
+}
+
+.payment-method {
+    margin-bottom: 30px;
+}
+
+.payment-option {
+    margin-bottom: 10px;
+}
+
+.pay-btn {
+    width: 100%;
+    padding: 15px;
+    font-size: 18px;
+    color: white;
+    background-color: #ff6600;
+    border: none;
+    cursor: pointer;
+}
+
+.pay-btn:hover {
+    background-color: #e65c00;
+}

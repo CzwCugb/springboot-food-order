@@ -2,6 +2,7 @@ package com.chen.foodsystem.mapper;
 
 import com.chen.foodsystem.pojo.Food;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.session.RowBounds;
 
 import java.util.List;
 
