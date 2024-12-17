@@ -5,8 +5,12 @@
 <mapper namespace="com.chen.foodsystem.mapper.OrderMapper">
 
     <!-- 根据订单ID查询订单 -->
-    <select id="getOrderById" parameterType="long" resultType="com.chen.foodsystem.pojo.Order">
-        SELECT * FROM orders WHERE orderId = #{orderId}
+    <select id="getOrdersByUserId" parameterType="int" resultType="com.chen.foodsystem.pojo.Order">
+        SELECT * FROM orders WHERE userID = #{userId}
+    </select>
+
+    <select id="getOrderByOrderId" parameterType="int" resultType="com.chen.foodsystem.pojo.Order">
+        SELECT * FROM orders WHERE orderID = #{orderId}
     </select>
 
     <!-- 查询所有订单 -->
@@ -16,14 +20,14 @@
 
     <!-- 插入新订单 -->
     <insert id="insertOrder" parameterType="com.chen.foodsystem.pojo.Order" useGeneratedKeys="true" keyProperty="orderId">
-        INSERT INTO orders (customerName, foodName, quantity, price, status)
-        VALUES (#{customerName}, #{foodName}, #{quantity}, #{price}, #{status})
+        INSERT INTO orders (foodName, quantity, price, userId, foodId)
+        VALUES (#{foodName}, #{quantity}, #{price}, #{userId}, #{foodId})
     </insert>
 
     <!-- 更新订单信息 -->
     <update id="updateOrder" parameterType="com.chen.foodsystem.pojo.Order">
         UPDATE orders
-        SET customerName = #{customerName},
+        SET userName = #{userName},
         foodName = #{foodName},
         quantity = #{quantity},
         price = #{price},
@@ -32,8 +36,8 @@
     </update>
 
     <!-- 删除订单 -->
-    <delete id="deleteOrder" parameterType="long">
-        DELETE FROM orders WHERE orderId = #{orderId}
+    <delete id="deleteOrder" parameterType="int">
+        DELETE FROM orders WHERE orderId = #{orderID}
     </delete>
 
 </mapper>

@@ -13,9 +13,14 @@ public class OrderService {
     @Autowired
     private OrderMapper orderMapper;
 
-    public Order getOrderById(int id) {
-        return orderMapper.getOrderById(id);
+    public List<Order> getOrdersByUserId(int userId) {
+        return orderMapper.getOrdersByUserId(userId);
     }
+
+    public Order getOrderByOrderId(int orderId){
+        return orderMapper.getOrderByOrderId(orderId);
+    }
+
 
     public List<Order> getAllOrders() {
         return orderMapper.getAllOrders();

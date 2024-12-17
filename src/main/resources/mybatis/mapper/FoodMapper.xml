@@ -9,6 +9,12 @@
         SELECT * FROM Food
     </select>
 
+    <!-- 分页查询所有食品 -->
+    <select id="findAllFoodPages" resultType="com.chen.foodsystem.pojo.Food">
+        SELECT * FROM Food
+    </select>
+
+
     <!-- 根据ID查询单个食品 -->
     <select id="findFoodById" parameterType="int" resultType="com.chen.foodsystem.pojo.Food">
         SELECT * FROM Food WHERE FoodID = #{foodID}

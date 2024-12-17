@@ -9,12 +9,12 @@ import java.util.Date;
 @Getter
 public class Order {
     private int orderId;
-    private String orderName;
+    private String userName;
     private String foodName;
     private int quantity;
     private double price;
     private Date orderdate;
     private String status;
-    private int userID;
-    private int foodID;
+    private int userId;
+    private int foodId;
 }

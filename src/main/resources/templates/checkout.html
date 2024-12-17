@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>结算页面</title>
     <link rel="stylesheet" href="/css/checkout.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
 <header>
@@ -12,7 +13,7 @@
 </header>
 
 <div class="checkout-container">
-    <div class="order-summary">
+    <div class="order-summary" th:data-user-id = "${userId}" id = "getUserId">
         <h3>订单详情</h3>
         <p>商品总数:<span th:text = "${itemSum}">0</span> 件</p>
         <p>总价: <span th:text = "${totalPrice}">0.00</span> 元</p>
@@ -39,19 +40,27 @@
 
 <script>
     // 获取支付按钮元素
-    const payButton = document.getElementById('payButton');
-
-    payButton.addEventListener('click', function() {
-        // 获取选中的支付方式
+    $("#payButton").click(function() {
         const paymentMethod = document.querySelector('input[name="payment-method"]:checked').value;
-
-        // 判断是支付宝还是微信支付
-        if (paymentMethod === 'alipay') {
-            // 模拟支付宝支付流程
-            alert('正在使用支付宝支付...');
-        } else if (paymentMethod === 'wechat') {
-            // 模拟微信支付流程
-            alert('正在使用微信支付...');
+        const userId = $("#getUserId").data("user-id")
+        if (paymentMethod === 'wechat') {
+            $.ajax({
+                url: '/checkout/' + userId + "/wechat",
+                method: 'POST',
+                success: function(response) {
+                    alert("微信支付成功");
+                    window.location.href = '/';
+                }
+            });
+        } else if (paymentMethod === 'alipay') {
+            $.ajax({
+                url: '/checkout/' + userId + "/alipay",
+                method: 'POST',
+                success: function(response) {
+                    alert("支付宝支付成功");
+                    window.location.href = '/';
+                }
+            });
         }
     });
 </script>

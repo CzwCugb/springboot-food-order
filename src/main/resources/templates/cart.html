@@ -13,6 +13,7 @@
 </header>
 
 <div class="cart-container">
+
     <table class="cart-table">
         <thead>
         <tr>
@@ -53,7 +54,6 @@
 </div>
 
 <script>
-
     $('.quantity-input').on('input', function() {
         var quantity = $(this).val();
         var $tr = $(this).closest('tr'); // 获取当前的行

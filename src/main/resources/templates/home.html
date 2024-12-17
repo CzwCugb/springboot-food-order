@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>用户订单管理</title>
+</head>
+<link rel="stylesheet" href="/css/home.css">
+<body>
+<header>
+    <h2>用户订单管理</h2>
+    <div class="auth-buttons">
+        <a th:href="@{/}">返回首页</a>
+    </div>
+</header>
+
+<div class="order-container">
+    <h3>我的订单</h3>
+
+    <!-- 如果用户有订单，展示订单列表 -->
+    <table th:if="${orders != null}">
+        <thead>
+        <tr>
+            <th>订单ID</th>
+            <th>商品名称</th>
+            <th>数量</th>
+            <th>总价</th>
+            <th>状态</th>
+            <th>操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="order : ${orders}" th:if = "${order.status != '已完成'}">
+            <td th:text="${order.orderId}">订单ID</td>
+            <td th:text="${order.foodName}">商品名称</td>
+            <td th:text="${order.quantity}">数量</td>
+            <td th:text="${order.price}">总价</td>
+            <td th:text="${order.status}">状态</td>
+            <td>
+                <a th:if = "${order.status == '制作中'}" th:href= "@{/home/{userId}/{orderId}/cancel(userId = ${order.userId},orderId = ${order.orderId})}">撤销订单</a>
+                <a th:if = "${order.status == '已撤销'}" th:href= "@{/home/{userId}/{orderId}/delete(userId = ${order.userId},orderId = ${order.orderId})}">删除订单</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<footer>
+    <p>&copy; 2024 网上订餐系统 | All Rights Reserved</p>
+</footer>
+
+
+</body>
+</html>

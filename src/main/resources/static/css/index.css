@@ -71,3 +71,62 @@ header {
     color: #777;
     margin-top: 10px;
 }
+
+.pagination {
+    text-align: center;
+    margin-top: 40px;
+}
+
+.pagination a {
+    display: inline-block;
+    padding: 8px 16px;
+    margin: 0 6px;
+    text-decoration: none;
+    background-color: #4CAF50; /* 初始背景颜色 */
+    color: white;
+    border-radius: 50%; /* 圆形按钮 */
+    font-size: 16px;
+    font-weight: bold;
+    transition: all 0.3s ease-in-out; /* 平滑过渡效果 */
+    border: 1px solid #4CAF50;
+}
+
+.pagination a:hover {
+    background-color: #45a049;
+    transform: translateY(-2px); /* 悬停时按钮上移 */
+}
+
+.pagination .active {
+    background-color: #ff5722; /* 当前页背景色 */
+    color: white;
+    border: 1px solid #ff5722; /* 高亮当前页的边框 */
+}
+
+.pagination .disabled {
+    background-color: #f1f1f1; /* 禁用按钮的背景色 */
+    color: #ddd;
+    cursor: not-allowed;
+    border: 1px solid #ddd;
+}
+
+.pagination .prev-page,
+.pagination .next-page {
+    padding: 8px 14px;
+    font-weight: bold;
+    background-color: #ff9800;
+    border-radius: 25px;
+    text-transform: uppercase; /* 转为大写 */
+}
+
+.pagination .prev-page:hover,
+.pagination .next-page:hover {
+    background-color: #f57c00;
+    transform: translateY(-2px); /* 悬停时上移 */
+}
+
+.pagination .prev-page.disabled,
+.pagination .next-page.disabled {
+    background-color: #f1f1f1;
+    color: #ddd;
+    cursor: not-allowed;
+}

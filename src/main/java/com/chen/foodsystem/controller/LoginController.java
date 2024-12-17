@@ -40,8 +40,11 @@ public class LoginController {
         // 将用户信息保存到 Session 中，表示登录状态
         session.setAttribute("loggedInUser", user);
 
-        // 登录成功后重定向到首页
-        return "redirect:/";
+        if ("admin".equalsIgnoreCase(username)) {
+            return "redirect:/admin/foods/";
+        } else {
+            return "redirect:/";
+        }
     }
 
     // 处理用户登出请求

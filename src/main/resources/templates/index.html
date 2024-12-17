@@ -10,16 +10,16 @@
     <h2>网上订餐系统</h2>
     <div class="auth-buttons">
         <a th:if="${session.loggedInUser}" th:href="@{/cart/{userID}(userID=${session.loggedInUser.userID})}">购物车</a>
+        <a th:if="${session.loggedInUser}" th:href="@{/home/{userID}(userID=${session.loggedInUser.userID})}">我的订单</a>
         <a th:if="${session.loggedInUser}" th:href="@{/login/logout}">退出</a>
         <a th:unless="${session.loggedInUser}" th:href="@{/login}">登录</a>
-
-        <a th:href="@{/register}">注册</a>
+        <a th:unless="${session.loggedInUser}" th:href="@{/register}">注册</a>
     </div>
 </header>
 
 <div class="food-container">
-    <div class="food-item" th:each="food : ${foodList}">
-        <a th:href="@{'http://localhost:8080/food/' + ${food.foodID}}">
+    <div th:if = "${foodPage.list}" class="food-item" th:each="food : ${foodPage.list}">
+        <a th:if = "${foodPage.list}" th:href="@{'http://localhost:8080/food/' + ${food.foodID}}">
             <img th:src="@{'/images/food/' + ${food.image}}" alt="食品图片">
             <div class="food-name" th:text="${food.name}">食品名称</div>
             <div class="food-price" th:text="'价格: ¥' + ${food.price}">价格: ¥XX.XX</div>
@@ -27,6 +27,30 @@
         </a>
     </div>
 </div>
+
+<div class="pagination">
+    <!-- 上一页按钮 -->
+    <span th:if="${foodPage.pageNum > 1}">
+        <a th:href="@{'/'+ ${foodPage.prePage}}" class="prev-page">上一页</a>
+    </span>
+    <span th:if="${foodPage.pageNum == 1}">
+        <span class="prev-page disabled">上一页</span>
+    </span>
+
+    <!-- 页码按钮 -->
+    <span th:each="i : ${#numbers.sequence(1, foodPage.pages)}">
+        <a th:href="@{'/' + ${i}}" th:text="${i}" th:classappend="${foodPage.pageNum == i ? 'active' : ''}"></a>
+    </span>
+
+    <!-- 下一页按钮 -->
+    <span th:if="${foodPage.pageNum < foodPage.pages}">
+        <a th:href="@{'/'+ ${foodPage.nextPage}}" class="next-page">下一页</a>
+    </span>
+    <span th:if="${foodPage.pageNum == foodPage.pages}">
+        <span class="next-page disabled">下一页</span>
+    </span>
+</div>
+
 </body>
 
 <footer>

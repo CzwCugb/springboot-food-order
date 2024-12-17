@@ -11,7 +11,9 @@ import java.util.List;
 @Repository
 public interface OrderMapper {
 
-    Order getOrderById(int orderId);
+    List<Order> getOrdersByUserId(int userId);
+
+    Order getOrderByOrderId(int orderId);
 
     List<Order> getAllOrders();
 
