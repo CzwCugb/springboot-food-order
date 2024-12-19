@@ -8,7 +8,7 @@
 
 数据库：MySQL
 
-前端：Vue.js
+前端：Thymeleaf
 
 ## 功能 | 计划表
 
