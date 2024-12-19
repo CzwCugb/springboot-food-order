@@ -9,6 +9,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import com.chen.foodsystem.utils.AESUtil; // 引入解密工具类
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.http.ResponseEntity;
+import org.springframework.http.HttpStatus;
 
 @Controller
 public class LoginController {
@@ -16,34 +20,39 @@ public class LoginController {
     @Autowired
     private UserService userService;
 
-    // 显示登录页面
+
     @GetMapping("/login")
-    public String showLoginPage() {
+    public String showLoginPage(HttpSession session) {
         return "login";
     }
 
-    // 处理登录请求
     @PostMapping("/login")
-    public String login(@RequestParam String username,
-                        @RequestParam String password,
-                        Model model,
-                        HttpSession session) {
+    @ResponseBody
+    public ResponseEntity<?> login(@RequestParam String username,
+                                   @RequestParam String password,
+                                   HttpSession session) {
+        //System.out.println("接收到的加密用户名: " + username);
+        //System.out.println("接收到的加密密码: " + password);
+        try {
+            String key = "secureKey1234567"; // 16字节密钥
 
-        User user = userService.findByUsername(username);
+            // 解密接收到的用户名和密码
+            String decryptedUsername = AESUtil.decrypt(username, key);
+            String decryptedPassword = AESUtil.decrypt(password, key);
 
-        // 验证密码
-        if (user == null || !user.getPassword().equals(password)) {
-            model.addAttribute("error", "用户名或密码错误");
-            return "login";
-        }
+            // 数据库校验
+            User user = userService.findByUsername(decryptedUsername);
+            if (user == null || !user.getPassword().equals(decryptedPassword)) {
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("用户名或密码错误");
+            }
 
-        // 将用户信息保存到 Session 中，表示登录状态
-        session.setAttribute("loggedInUser", user);
+            // 保存登录状态
+            session.setAttribute("loggedInUser", user);
+            return ResponseEntity.ok("登录成功");
 
-        if ("admin".equalsIgnoreCase(username)) {
-            return "redirect:/admin/foods/";
-        } else {
-            return "redirect:/";
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("服务器错误，请稍后重试");
         }
     }
 

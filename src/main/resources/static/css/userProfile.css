@@ -1,12 +1,12 @@
+/* userProfile.css */
+
 body {
     font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-    margin: 0;
-    padding: 0;
+    background-color: #f2f2f2;
 }
 
 header {
-    background-color: #f4ca60;
+    background-color: #499de1;
     color: white;
     display: flex;
     justify-content: space-between;
@@ -58,47 +58,70 @@ header {
 }
 
 
-.checkout-container {
-    width: 30%;
-    margin: 20px auto;
-    padding: 20px;
-    background-color: white;
-    align-items: center;
-    text-align: center;
+.container {
+    width: 400px;
+    margin: 50px auto;
+    padding: 30px;
+    background-color: #ffffff;
+    border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-.order-summary {
+h2 {
+    text-align: center;
     margin-bottom: 20px;
+    color: #333333;
 }
 
-.payment-method {
-    margin-bottom: 30px;
+.form-group {
+    margin-bottom: 15px;
 }
 
-.payment-option {
-    margin-bottom: 10px;
+label {
+    display: block;
+    margin-bottom: 5px;
+    color: #555555;
 }
 
-.pay-btn {
+input[type="text"],
+input[type="password"],
+input[type="email"],
+input[type="tel"] {
     width: 100%;
-    padding: 15px;
-    font-size: 18px;
-    color: #ffffff;
-    background-color: #fd7228;
-    border: none;
-    cursor: pointer;
-    text-align: center; /* 文本居中 */
-    border-radius: 30px; /* 圆角按钮 */
-    transition: all 0.3s ease; /* 动画效果 */
+    padding: 8px 10px;
+    box-sizing: border-box;
+    border: 1px solid #cccccc;
+    border-radius: 4px;
+    transition: border-color 0.3s;
 }
 
-.pay-btn:hover {
-    background-color: #ea962a;
+input[readonly] {
+    background-color: #e9e9e9;
+}
+
+input:focus {
+    border-color: #66afe9;
+    outline: none;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    font-size: 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #45a049;
 }
 
 footer {
-    background-color: #f4ca60; /* 蓝色背景 */
+    background-color: #499de1; /* 蓝色背景 */
     color: white;
     text-align: center;
     padding: 20px;

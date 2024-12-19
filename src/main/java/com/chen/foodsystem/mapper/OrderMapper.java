@@ -11,16 +11,26 @@ import java.util.List;
 @Repository
 public interface OrderMapper {
 
+    List<Order> findOrdersByUsername(String username);
+
+    List<Order> findOrderPagesByUsername(String username);
+
+    List<Order> findAllOrderPages();
+
+    List<Order> findAllOrders();
+
     List<Order> getOrdersByUserId(int userId);
 
     Order getOrderByOrderId(int orderId);
-
-    List<Order> getAllOrders();
 
     void insertOrder(Order order);
 
     void updateOrder(Order order);
 
-    void deleteOrder(int orderId);
+    void deleteOrder(Long orderId);
+
+
+
+    Order getOrderById(Long orderId);
 
 }

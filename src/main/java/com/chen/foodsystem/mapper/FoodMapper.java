@@ -1,9 +1,7 @@
 package com.chen.foodsystem.mapper;
 
 import com.chen.foodsystem.pojo.Food;
-import com.github.pagehelper.Page;
 import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.session.RowBounds;
 
 import java.util.List;
 
@@ -14,6 +12,10 @@ public interface FoodMapper {
 
     List<Food> findAllFoodPages();
 
+    List<Food> findFoodsByFoodName(String foodName);
+
+    List<Food> findFoodPagesByFoodName(String foodName);
+
     Food findFoodById(int foodID);
 
     void insertFood(Food food);
@@ -21,4 +23,6 @@ public interface FoodMapper {
     void updateFood(Food food);
 
     void deleteFood(int foodID);
+
+    List<Food> findFoodByName(String name);
 }

@@ -14,6 +14,11 @@
     SELECT * FROM User
   </select>
 
+  <!-- 查询所有用户 分页 -->
+  <select id="findAllUserPages" resultType="com.chen.foodsystem.pojo.User">
+    SELECT * FROM User
+  </select>
+
   <!-- 根据ID查询用户 -->
   <select id="findUserById" parameterType="int" resultType="com.chen.foodsystem.pojo.User">
     SELECT * FROM User WHERE UserID = #{userID}
@@ -40,5 +45,22 @@
   <delete id="deleteUser" parameterType="int">
     DELETE FROM User WHERE UserID = #{userID}
   </delete>
+
+  <!-- 精确查询用户 -->
+  <select id="findUserByExactUsername" parameterType="string" resultType="com.chen.foodsystem.pojo.User">
+    SELECT * FROM User WHERE Username = #{username}
+  </select>
+
+  <!-- 模糊查询用户 -->
+  <select id="findUsersByUsername" parameterType="string" resultType="com.chen.foodsystem.pojo.User">
+    SELECT * FROM User WHERE Username LIKE CONCAT('%', #{username}, '%')
+  </select>
+
+
+  <!-- 模糊查询用户 (分页)-->
+  <select id="findUserPagesByUsername" parameterType="string" resultType="com.chen.foodsystem.pojo.User">
+    SELECT * FROM User WHERE Username LIKE CONCAT('%', #{username}, '%')
+  </select>
+
 
 </mapper>

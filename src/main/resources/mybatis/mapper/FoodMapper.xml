@@ -14,6 +14,13 @@
         SELECT * FROM Food
     </select>
 
+    <select id="findFoodsByFoodName" resultType="com.chen.foodsystem.pojo.Food">
+        SELECT * FROM Food WHERE Name LIKE CONCAT('%', #{foodName}, '%')
+    </select>
+
+    <select id="findFoodPagesByFoodName" resultType="com.chen.foodsystem.pojo.Food">
+        SELECT * FROM Food WHERE Name LIKE CONCAT('%', #{foodName}, '%')
+    </select>
 
     <!-- 根据ID查询单个食品 -->
     <select id="findFoodById" parameterType="int" resultType="com.chen.foodsystem.pojo.Food">
@@ -41,5 +48,10 @@
     <delete id="deleteFood" parameterType="int">
         DELETE FROM Food WHERE FoodID = #{foodID}
     </delete>
+
+    <!-- 根据名称模糊查询食品 -->
+    <select id="findFoodByName" parameterType="string" resultType="com.chen.foodsystem.pojo.Food">
+        SELECT * FROM Food WHERE Name LIKE CONCAT('%', #{name}, '%')
+    </select>
 
 </mapper>

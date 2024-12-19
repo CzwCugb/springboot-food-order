@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>结算页面</title>
+    <link rel="stylesheet" href="/css/checkout.css">
+    <!-- 引入 jQuery 库 -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+<header>
+    <img src="/images/bill.png" alt="Logo" class="logo">
+    <h2>结算</h2>
+    <div class="btn-home">
+        <a th:href="@{/cart/{id}(id=${userId})}">取消支付</a>
+    </div>
+</header>
+
+<div class="checkout-container">
+    <!-- 订单详情 -->
+    <div class="order-summary" th:data-user-id="${userId}" id="getUserId">
+        <h3>订单详情</h3>
+        <p>商品总数: <span th:text="${itemSum}">0</span> 件</p>
+        <p>总价: <span th:text="${totalPrice}">0.00</span> 元</p>
+    </div>
+
+    <!-- 支付方式选择 -->
+    <div class="payment-method">
+        <h3>选择支付方式</h3>
+        <div class="payment-option">
+            <label>
+                <input type="radio" name="payment-method" value="alipay" checked> 支付宝
+            </label>
+        </div>
+        <div class="payment-option">
+            <label>
+                <input type="radio" name="payment-method" value="wechat"> 微信支付
+            </label>
+        </div>
+    </div>
+
+    <!-- 支付二维码图片展示区域 -->
+    <div class="payment-image">
+        <img id="paymentQRCode" src="/images/alipay.jpg" alt="支付二维码" style="width: 300px; height: auto;">
+    </div>
+
+    <!-- 支付按钮 -->
+    <div class="payment-button">
+        <button id="payButton" class="pay-btn">立即支付</button>
+    </div>
+</div>
+
+<!-- 底部 -->
+<footer>
+    <p>&copy; 2024 网上订餐系统 - All Rights Reserved.</p>
+</footer>
+
+<!-- JavaScript 代码 -->
+<script>
+    $(document).ready(function () {
+        // 监听支付方式的切换
+        $('input[name="payment-method"]').change(function () {
+            const paymentMethod = $(this).val();
+            const paymentImage = $('#paymentQRCode');
+
+            // 根据选择的支付方式切换二维码图片
+            if (paymentMethod === 'wechat') {
+                paymentImage.attr('src', '/images/wechatpay.jpg');
+            } else if (paymentMethod === 'alipay') {
+                paymentImage.attr('src', '/images/alipay.jpg');
+            }
+        });
+
+        // 支付按钮点击事件
+        $("#payButton").click(function () {
+            const paymentMethod = $('input[name="payment-method"]:checked').val();
+            const userId = $("#getUserId").data("user-id");
+
+            if (paymentMethod === 'wechat') {
+                $.ajax({
+                    url: '/checkout/' + userId + "/wechat",
+                    method: 'POST',
+                    success: function (response) {
+                        alert("微信支付成功");
+                        window.location.href = '/';
+                    },
+                    error: function () {
+                        alert("微信支付失败，请重试");
+                    }
+                });
+            } else if (paymentMethod === 'alipay') {
+                $.ajax({
+                    url: '/checkout/' + userId + "/alipay",
+                    method: 'POST',
+                    success: function (response) {
+                        alert("支付宝支付成功");
+                        window.location.href = '/';
+                    },
+                    error: function () {
+                        alert("支付宝支付失败，请重试");
+                    }
+                });
+            }
+        });
+    });
+</script>
+</body>
+</html>

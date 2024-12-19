@@ -1,8 +1,10 @@
 package com.chen.foodsystem.controller;
 
 import com.chen.foodsystem.pojo.Food;
+import com.chen.foodsystem.pojo.User;
 import com.chen.foodsystem.service.OrderService;
 import com.chen.foodsystem.service.UserService;
+import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import com.chen.foodsystem.service.FoodService;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -37,22 +40,7 @@ public class IndexController {
     @RequestMapping("/home/{userID}")
     public String showHomePage(@PathVariable("userID") int userId, Model model) {
         model.addAttribute("orders", orderService.getOrdersByUserId(userId));
-        System.out.println("success");
         return "home";
-    }
-
-
-    // 获取商品列表
-    @RequestMapping("/debug-unuse")
-    public String showIndexPage(Model model, HttpSession session) {
-        List<Food> foodList = foodService.getAllFoods();
-        model.addAttribute("foodList", foodList);
-
-        // debug 设置为管理员
-        // session.setAttribute("loggedInUser", userService.findByUsername("admin"));
-        //return "redirect:/admin/foods/";
-        // 默认：
-        return "index";
     }
 
     // 获取商品列表（带分页）
@@ -63,9 +51,25 @@ public class IndexController {
         return "index";  // 返回食品列表视图
     }
 
+    // 根据关键字模糊搜索商品
+    @RequestMapping("/search")
+    public String searchFoods(@RequestParam("foodName") String foodName,
+                              @RequestParam(value = "pageNum", defaultValue = "1") int pageNum,
+                              Model model) {
+        PageHelper.startPage(pageNum, 12);  // 分页，每页12条数据
+        List<Food> foodList = foodService.getFoodsByFoodName(foodName);
+        PageInfo<Food> pageInfo = new PageInfo<>(foodList);
+
+        model.addAttribute("foodPage", pageInfo);
+        model.addAttribute("searchKey", foodName); // 保存搜索关键字返回页面
+        return "index";
+    }
+
     @RequestMapping("/")
-    public String showPageOne() {
-        return "redirect:/1";
+    public String showPageOne(HttpSession session) {
+        User user = (User) session.getAttribute("loggedInUser");
+        if(user != null && user.getRole().equals("管理员")) return "redirect:/admin/food/1";
+        else return "redirect:/1";
     }
 
 }

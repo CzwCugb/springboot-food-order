@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>菜品管理</title>
+    <link rel="stylesheet" href="/css/adminfood.css">
+</head>
+<body>
+<div class="container">
+    <header class="top-header">
+        <span>网上订餐系统：管理端</span>
+    </header>
+
+    <header>
+        <h1>菜品管理</h1>
+        <nav>
+            <a href="/admin/food" class="active">菜品管理</a>
+            <a href="/admin/user">用户管理</a>
+            <a href="/admin/order">订单管理</a>
+            <a href="/login/logout" class="btn-logout">退出</a>
+        </nav>
+    </header>
+
+    <main>
+        <div class="actions">
+            <form action="/admin/food/search/1" method="get">
+                <input type="text" name="name" placeholder="输入菜品名称" th:value="${searchName}" required>
+                <button type="submit">搜索</button>
+                <button type="button" onclick="location.href='/admin/food/1'">重置</button>
+            </form>
+            <button onclick="location.href='/admin/food/create'">添加菜品</button>
+        </div>
+
+        <table>
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>名称</th>
+                <th>描述</th>
+                <th>价格</th>
+                <th>图片</th>
+                <th>状态</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            <!-- 动态循环展示菜品列表 -->
+            <tr th:if = "${foodPage.list}" th:each="food : ${foodPage.list}">
+                <td th:text="${food.foodID}"></td>
+                <td th:text="${food.name}"></td>
+                <td th:text="${food.description}"></td>
+                <td th:text="${food.price}"></td>
+                <td>
+                    <img th:src="@{'/images/food/' + ${food.image}}" alt="Food Image" class="food-img">
+                </td>
+                <td th:text="${food.available ? '可用' : '不可用'}"></td>
+                <td>
+                    <a th:href="@{/admin/food/edit/{id}(id=${food.foodID})}" class="btn-edit">修改</a>
+                    <a th:href="@{/admin/food/delete/{id}(id=${food.foodID})}"
+                       onclick="return confirm('是否确认删除？');"
+                       class="btn-delete">删除</a>
+                </td>
+            </tr>
+            <!-- 未找到匹配菜品的提示 -->
+            <tr th:if="${foodPage.list.isEmpty()}">
+                <td colspan="7">未找到匹配的菜品</td>
+            </tr>
+            </tbody>
+        </table>
+    </main>
+
+    <div class="pagination">
+        <!-- 上一页按钮 -->
+        <span th:if="${foodPage.pageNum > 1}">
+        <a th:href="@{'/admin/food/'+ ${foodPage.prePage}}" class="prev-page">上一页</a>
+    </span>
+        <span th:if="${foodPage.pageNum == 1}">
+        <span class="prev-page disabled">上一页</span>
+    </span>
+
+        <!-- 页码按钮 -->
+        <span th:each="i : ${#numbers.sequence(1, foodPage.pages)}">
+        <a th:href="@{'/admin/food/' + ${i}}" th:text="${i}" th:classappend="${foodPage.pageNum == i ? 'active' : ''}"></a>
+    </span>
+
+        <!-- 下一页按钮 -->
+        <span th:if="${foodPage.pageNum < foodPage.pages}">
+        <a th:href="@{'/admin/food/'+ ${foodPage.nextPage}}" class="next-page">下一页</a>
+    </span>
+        <span th:if="${foodPage.pageNum == foodPage.pages}">
+        <span class="next-page disabled">下一页</span>
+    </span>
+    </div>
+</div>
+
+
+
+</body>
+</html>

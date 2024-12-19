@@ -9,7 +9,11 @@
 <body>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <header>
+    <img src="/images/cart.png" alt="Logo" class="logo">
     <h2>购物车</h2>
+    <div class="btn-home">
+        <a th:href= "@{/}">返回首页</a>
+    </div>
 </header>
 
 <div class="cart-container">
@@ -44,7 +48,7 @@
     <div class="cart-summary">
         <p>总价: <span th:text="${totalPrice}" >0.00</span> 元</p>
         <form th:action="@{/cart/{userID}/deleteAll(userID = ${session.loggedInUser.userID})}" method="post">
-            <button type="submit" class="checkout-btn" style="background-color:#ff6600">清空</button>
+            <button type="submit" class="clear-btn">清空</button>
         </form>
         <form th:action="@{/checkout/{userID}(userID = ${session.loggedInUser.userID})}" method="post">
             <button type="submit" class="checkout-btn">结算</button>
@@ -52,6 +56,11 @@
     </div>
 
 </div>
+
+<!-- 底部 -->
+<footer>
+    <p>&copy; 2024 网上订餐系统 - All Rights Reserved.</p>
+</footer>
 
 <script>
     $('.quantity-input').on('input', function() {

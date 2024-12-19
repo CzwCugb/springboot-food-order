@@ -6,6 +6,18 @@
     <link rel="stylesheet" href="/css/register.css">
 </head>
 <body>
+<img src="/images/loginpic.png" class = "pic">
+<!-- 顶部导航栏 -->
+<header>
+    <div class="logo-container">
+        <img src="/images/icons/favicon.ico" alt="Logo" class="logo">
+        <h2>网上订餐系统</h2>
+    </div>
+    <div class="btn-home">
+        <a href="/">返回主页</a>
+    </div>
+</header>
+
 <div class="register-container">
     <h2>用户注册</h2>
     <form th:action="@{/register}" method="post">
@@ -27,5 +39,10 @@
         已有账户？ <a th:href="@{/login}">立即登录</a>
     </div>
 </div>
+
+<!-- 底部 -->
+<footer>
+    <p>&copy; 2024 网上订餐系统 - All Rights Reserved.</p>
+</footer>
 </body>
 </html>

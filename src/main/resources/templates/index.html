@@ -2,21 +2,38 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>网上订餐系统</title>
+    <title>欢迎访问网上订餐系统！</title>
     <link rel="stylesheet" href="/css/index.css">
+    <link rel="shortcut icon" href="/images/icons/favicon.ico"/>
+    <link rel="bookmark" href= "/images/icons/favicon.ico"/>
 </head>
 <body>
 <header>
+    <!-- Logo -->
+    <div class="logo-container">
+        <img src="/images/icons/favicon.ico" alt="Logo" class="logo"/>
+    </div>
     <h2>网上订餐系统</h2>
+    <!-- 搜索框 -->
+    <form th:action="@{/search}" method="get" class="search-form">
+        <input type="text" name="foodName" placeholder="输入菜品名称搜索" th:value="${searchKey}" required>
+        <button type="submit">搜索</button>
+        <!-- 重置按钮 -->
+        <a href="/" class="reset-button" style="text-decoration: none;">
+            <button type="button">重置</button>
+        </a>
+    </form>
+
     <div class="auth-buttons">
         <a th:if="${session.loggedInUser}" th:href="@{/cart/{userID}(userID=${session.loggedInUser.userID})}">购物车</a>
+        <a th:if="${session.loggedInUser}" th:href="@{/userProfile/{userID}(userID=${session.loggedInUser.userID})}">个人信息</a>
         <a th:if="${session.loggedInUser}" th:href="@{/home/{userID}(userID=${session.loggedInUser.userID})}">我的订单</a>
         <a th:if="${session.loggedInUser}" th:href="@{/login/logout}">退出</a>
         <a th:unless="${session.loggedInUser}" th:href="@{/login}">登录</a>
         <a th:unless="${session.loggedInUser}" th:href="@{/register}">注册</a>
     </div>
 </header>
-
+<main>
 <div class="food-container">
     <div th:if = "${foodPage.list}" class="food-item" th:each="food : ${foodPage.list}">
         <a th:if = "${foodPage.list}" th:href="@{'http://localhost:8080/food/' + ${food.foodID}}">
@@ -27,7 +44,7 @@
         </a>
     </div>
 </div>
-
+</main>
 <div class="pagination">
     <!-- 上一页按钮 -->
     <span th:if="${foodPage.pageNum > 1}">
@@ -51,6 +68,7 @@
     </span>
 </div>
 
+<div><br></div>
 </body>
 
 <footer>

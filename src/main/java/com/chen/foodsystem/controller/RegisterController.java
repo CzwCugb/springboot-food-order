@@ -43,6 +43,7 @@ public class RegisterController {
         User user = new User();
         user.setUsername(username);
         user.setPassword(password);
+        user.setRole("客户");
         userService.addUser(user);
         return "redirect:/login";
     }

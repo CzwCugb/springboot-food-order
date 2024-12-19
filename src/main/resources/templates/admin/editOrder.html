@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>更新订单</title>
+  <link rel="stylesheet" href="/css/editOrder.css">
+</head>
+<body>
+<div class="container">
+  <!-- 页面头部 -->
+  <header>
+    <h1>更新订单</h1>
+    <nav>
+      <a href="/admin/food">菜品管理</a>
+      <a href="/admin/user">用户管理</a>
+      <a href="/admin/order" class="active">订单管理</a>
+    </nav>
+  </header>
+
+  <!-- 订单更新表单 -->
+  <main>
+    <form th:action="@{/admin/order/update}" method="post">
+      <input type="hidden" name="orderId" th:value="${order.orderId}">
+
+      <div class="form-group">
+        <label for="userName">用户名</label>
+        <input type="text" id="userName" name="userName" th:value="${order.userName}" required>
+      </div>
+
+      <div class="form-group">
+        <label for="foodName">菜品名称</label>
+        <input type="text" id="foodName" name="foodName" th:value="${order.foodName}" required>
+      </div>
+
+      <div class="form-group">
+        <label for="quantity">数量</label>
+        <input type="number" id="quantity" name="quantity" th:value="${order.quantity}" required>
+      </div>
+
+      <div class="form-group">
+        <label for="price">价格</label>
+        <input type="number" step="0.01" id="price" name="price" th:value="${order.price}" required>
+      </div>
+
+      <div class="form-group">
+        <label for="status">状态</label>
+        <select id="status" name="status">
+          <option value="制作中" th:selected="${order.status == '制作中'}">制作中</option>
+          <option value="已撤销" th:selected="${order.status == '已撤销'}">已撤销</option>
+          <option value="已完成" th:selected="${order.status == '已完成'}">已完成</option>
+        </select>
+      </div>
+
+      <div class="form-actions">
+        <button type="submit" class="btn-save">保存</button>
+        <a href="/admin/order" class="btn-cancel">取消</a>
+      </div>
+    </form>
+  </main>
+</div>
+</body>
+</html>

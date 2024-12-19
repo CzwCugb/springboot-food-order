@@ -1,17 +1,25 @@
 body {
     font-family: Arial, sans-serif;
+    flex-direction: column;  /* 上下布局 */
     margin: 0;
     padding: 0;
 }
 
+
+
 footer {
-    background-color: #2c3e50;
+    background-color: #f88b2f;
     color: white;
     text-align: center;
     padding: 20px;
     position: relative;
     bottom: 0;
     width: 100%;
+    box-shadow: 0 5px 50px rgba(0, 0, 0, 0.1);
+}
+
+main {
+    min-height:65vh;
 }
 
 header {
@@ -21,13 +29,53 @@ header {
     background-color: #f8f8f8;
     padding: 1em;
     border-bottom: 1px solid #ddd;
+    box-shadow: 0 5px 50px rgba(0, 0, 0, 0.1);
 }
+
+
+/* 标题样式 */
+header h2 {
+    display: inline-block;
+    vertical-align: middle;  /* 使标题与Logo对齐 */
+    font-size: 24px;
+    color: #333;
+    margin: 0;
+}
+
+/* 登录和注册按钮基础样式 */
 .auth-buttons a {
-    margin-left: 1em;
-    text-decoration: none;
-    color: #007bff;
-    font-weight: bold;
+    display: inline-block;
+    padding: 10px 20px; /* 按钮内边距 */
+    background-color: #e4a329; /* 按钮背景色 */
+    color: #fff; /* 按钮文本颜色 */
+    font-size: 16px;
+    font-weight: bold; /* 加粗文本 */
+    text-align: center; /* 文本居中 */
+    border-radius: 30px; /* 圆角按钮 */
+    text-decoration: none; /* 去掉链接的下划线 */
+    transition: all 0.3s ease; /* 动画效果 */
+    cursor: pointer;
 }
+
+/* 悬停状态 */
+.auth-buttons a:hover {
+    background-color: #e8821d; /* 悬停时背景色 */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 添加阴影 */
+}
+
+/* 点击时的效果 */
+.auth-buttons a:active {
+    background-color: #ff7500; /* 点击时的背景色 */
+    transform: scale(0.98); /* 按钮缩小效果 */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 减少阴影 */
+}
+
+/* 更大的按钮 */
+.auth-buttons a.large {
+    padding: 15px 30px;
+    font-size: 18px;
+}
+
 .food-container {
     display: flex;
     flex-wrap: wrap;
@@ -41,7 +89,7 @@ header {
     border-radius: 8px;
     margin: 0.5em 0; /* 修改上下间距 */
     padding: 1em;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 阴影效果 */
     text-align: center;
     box-sizing: border-box; /* 确保宽度包含内边距 */
 
@@ -52,17 +100,26 @@ header {
 }
 
 .food-item img {
-    width:150px;
-    height:150px;
+    width:180px;
+    height:180px;
     border-bottom: 1px solid #ddd;
     margin-bottom: 1em;
+    transition: transform 0.3s ease; /* 让图片放大有平滑过渡 */
+    border-radius: 8px; /* 为图片添加圆角 */
 }
+
+/* 鼠标悬停时，图片放大 */
+.food-item:hover img {
+    transform: scale(1.1); /* 图片放大1.1倍 */
+}
+
 .food-name {
     font-size: 1.2em;
     font-weight: bold;
+    color: #f39700;
 }
 .food-price {
-    color: #e74c3c;
+    color: #ec3727;
     font-weight: bold;
 }
 
@@ -70,6 +127,19 @@ header {
     font-size: 14px;
     color: #777;
     margin-top: 10px;
+}
+
+/* Logo容器样式 */
+.logo-container {
+    display: inline-block;
+    margin-right: 20px;  /* Logo与标题之间的间距 */
+}
+
+/* Logo样式 */
+.logo {
+    height: 40px;  /* 调整Logo的高度，具体可根据你的实际情况调整 */
+    width: auto;  /* 保持图片比例 */
+    vertical-align: middle;  /* 使Logo与标题垂直对齐 */
 }
 
 .pagination {
@@ -129,4 +199,68 @@ header {
     background-color: #f1f1f1;
     color: #ddd;
     cursor: not-allowed;
+}
+
+/* 搜索框容器 */
+.search-form {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 600px;
+    margin: 0 auto;
+    border-radius: 50px; /* 圆角 */
+    overflow: hidden;
+    background-color: #e4e4e4; /* 淡灰色背景 */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 阴影效果 */
+}
+
+/* 输入框样式 */
+.search-form input {
+    width: 100%;
+    padding: 15px 20px;
+    margin: 5px;
+    border: none;
+    outline: none;
+    font-size: 16px;
+    border-radius: 50px 50px 50px 50px; /* 圆角 */
+    background-color: #fff;
+    transition: all 0.3s ease; /* 平滑过渡效果 */
+}
+
+.search-form input:focus {
+    border: 2px solid #8784ff; /* 聚焦时的边框颜色 */
+}
+
+/* 搜索按钮样式 */
+.search-form button {
+    padding: 0; /* 去掉内边距 */
+    width: auto;  /* 宽度由内容决定 */
+    height: 50px;  /* 设置固定高度 */
+    min-width: 52px; /* 设置最小宽度 */
+    border: none;
+    margin: 5px;
+    background-color: #569eed; /* 按钮背景颜色 */
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 50%; /* 圆形按钮 */
+    transition: all 0.3s ease;
+    display: inline-flex; /* 让按钮成为内联的flex容器 */
+    align-items: center;  /* 垂直居中 */
+    justify-content: center; /* 水平居中 */
+    white-space: nowrap; /* 防止文本换行 */
+    text-align: center; /* 确保文字居中 */
+    overflow: hidden; /* 超出部分隐藏 */
+}
+
+/* 如果按钮里的文字太长，字体大小自动缩小 */
+.search-form button span {
+    white-space: nowrap; /* 强制不换行 */
+    overflow: hidden; /* 防止溢出 */
+    text-overflow: ellipsis; /* 如果文本超出则显示省略号 */
+}
+
+/* 按钮悬停效果 */
+.search-form button:hover {
+    background-color: #1352c8; /* 按钮悬停时颜色变化 */
 }

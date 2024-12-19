@@ -7,6 +7,52 @@ body {
     height: 100vh;
     margin: 0;
 }
+
+/* 顶部条样式 */
+header {
+    background-color: #499de1;; /* 蓝色背景 */
+    color: #ffffff;
+    padding: 10px 30px;         /* 内边距 */
+    font-size: 18px;            /* 字体大小 */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: absolute;         /* 固定在页面顶部 */
+    top: 0;                     /* 距离页面顶部0px */
+    left: 0;                    /* 距离页面左侧0px */
+    right: 0;                   /* 距离页面右侧0px */
+    box-shadow: 0 5px 50px rgba(0, 0, 0, 0.1);
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+}
+
+.logo {
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+}
+
+header h2 {
+    font-size: 24px;
+    color: #333;
+    margin: 0;
+}
+
+/* 底部样式，使用绝对定位 */
+footer {
+    background-color: #499de1; /* 蓝色背景 */
+    color: white;
+    text-align: center;
+    padding: 20px;
+    position: absolute; /* 使footer固定在底部 */
+    bottom: 0;  /* 固定在页面底部 */
+    width: 100%;  /* 宽度100% */
+    left: 0;  /* 确保在页面内 */
+    box-shadow: 0 5px 50px rgba(0, 0, 0, 0.1);
+}
 .login-container {
     background-color: #fff;
     padding: 2em;
@@ -28,7 +74,7 @@ body {
     margin-bottom: 0.5em;
 }
 .form-group input {
-    width: 100%;
+    width: 95%;
     padding: 0.7em;
     border: 1px solid #ccc;
     border-radius: 4px;
@@ -46,6 +92,34 @@ body {
 .btn-login:hover {
     background-color: #0056b3;
 }
+/* 登录和注册按钮基础样式 */
+.btn-home a {
+    display: inline-block;
+    padding: 10px 20px; /* 按钮内边距 */
+    background-color: #44c1ef; /* 按钮背景色 */
+    color: #fff; /* 按钮文本颜色 */
+    font-size: 16px;
+    font-weight: bold; /* 加粗文本 */
+    text-align: center; /* 文本居中 */
+    border-radius: 30px; /* 圆角按钮 */
+    text-decoration: none; /* 去掉链接的下划线 */
+    transition: all 0.3s ease; /* 动画效果 */
+    cursor: pointer;
+}
+
+/* 悬停状态 */
+.btn-home a:hover {
+    background-color: #1c8f88; /* 悬停时背景色 */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 添加阴影 */
+}
+
+/* 点击时的效果 */
+.btn-home a:active {
+    background-color: #64cbd6; /* 点击时的背景色 */
+    transform: scale(0.98); /* 按钮缩小效果 */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 减少阴影 */
+}
+
 .register-link {
     margin-top: 1em;
     display: block;
@@ -56,4 +130,13 @@ body {
 }
 .register-link a:hover {
     text-decoration: underline;
+}
+/* 限制图片大小 */
+.pic {
+    width: 100%;   /* 图片宽度自适应父元素宽度 */
+    max-width: 550px; /* 图片最大宽度限制为 300px */
+    height: auto;   /* 保持图片的纵横比 */
+    border-radius: 8px; /* 可选：圆角效果 */
+    object-fit: cover;  /* 保证图片不失真填充容器 */
+    margin: 10px;
 }

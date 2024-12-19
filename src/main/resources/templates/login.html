@@ -4,11 +4,24 @@
 	<meta charset="UTF-8">
 	<title>用户登录 - 网上订餐系统</title>
 	<link rel="stylesheet" href="/css/login.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
 </head>
 <body>
+<!-- 顶部导航栏 -->
+<header>
+	<div class="logo-container">
+		<img src="/images/icons/favicon.ico" alt="Logo" class="logo">
+		<h2>网上订餐系统</h2>
+	</div>
+	<div class="btn-home">
+		<a href="/">返回主页</a>
+	</div>
+</header>
+<img src="/images/loginpic.png" class = "pic">
 <div class="login-container">
 	<h2>用户登录</h2>
-	<form th:action="@{/login}" method="post">
+	<!-- 绑定表单的 onsubmit 事件，调用 submitLogin 方法 -->
+	<form onsubmit="event.preventDefault(); submitLogin();" method="post">
 		<div class="form-group">
 			<label for="username">用户名</label>
 			<input type="text" id="username" name="username" required>
@@ -23,5 +36,58 @@
 		还没有账户？ <a th:href="@{/register}">立即注册</a>
 	</div>
 </div>
+
+<!-- 底部 -->
+<footer>
+	<p>&copy; 2024 网上订餐系统 - All Rights Reserved.</p>
+</footer>
+
+<script>
+	// AES加密方法
+	const key = CryptoJS.enc.Utf8.parse("secureKey1234567"); // 16字节密钥
+	const options = { mode: CryptoJS.mode.ECB, padding: CryptoJS.pad.Pkcs7 };
+
+	function encryptData(data) {
+		const encrypted = CryptoJS.AES.encrypt(data, key, options);
+		return encrypted.toString(); // 返回加密后的Base64字符串
+	}
+
+	// 提交方法
+	function submitLogin() {
+		const username = document.getElementById('username').value;
+		const password = document.getElementById('password').value;
+
+		if (!username || !password) {
+			alert("用户名和密码不能为空");
+			return;
+		}
+
+		// 加密数据
+		const encryptedUsername = encryptData(username);
+		const encryptedPassword = encryptData(password);
+
+		//console.log("加密后的用户名:", encryptedUsername);
+		//console.log("加密后的密码:", encryptedPassword);
+
+		// 发送加密数据
+		fetch('/login', {
+			method: 'POST',
+			headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+			body: `username=${encodeURIComponent(encryptedUsername)}&password=${encodeURIComponent(encryptedPassword)}`
+		})
+				.then(response => {
+					if (response.ok) {
+						window.location.href = '/'; // 登录成功跳转
+					} else {
+						return response.text();
+					}
+				})
+				.then(errorMsg => {
+					if (errorMsg) {
+						alert(errorMsg);
+					}
+				});
+	}
+</script>
 </body>
 </html>

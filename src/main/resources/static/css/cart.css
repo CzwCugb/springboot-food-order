@@ -6,10 +6,54 @@ body {
 }
 
 header {
-    background-color: #333;
+    background-color: #65717a;
     color: white;
-    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 30px;
     text-align: center;
+    align-items: center;
+    box-shadow: 0 5px 50px rgba(0, 0, 0, 0.1);
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+}
+
+.logo {
+    width: 60px;
+    height: 60px;
+    margin-right: 10px;
+}
+
+
+/* 登录和注册按钮基础样式 */
+.btn-home a {
+    display: inline-block;
+    padding: 10px 20px; /* 按钮内边距 */
+    background-color: #534e4e; /* 按钮背景色 */
+    color: #fff; /* 按钮文本颜色 */
+    font-size: 16px;
+    font-weight: bold; /* 加粗文本 */
+    text-align: center; /* 文本居中 */
+    border-radius: 30px; /* 圆角按钮 */
+    text-decoration: none; /* 去掉链接的下划线 */
+    transition: all 0.3s ease; /* 动画效果 */
+    cursor: pointer;
+}
+
+/* 悬停状态 */
+.btn-home a:hover {
+    background-color: #3a3838; /* 悬停时背景色 */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 添加阴影 */
+}
+
+/* 点击时的效果 */
+.btn-home a:active {
+    background-color: #8b8b8c; /* 点击时的背景色 */
+    transform: scale(0.98); /* 按钮缩小效果 */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 减少阴影 */
 }
 
 .auth-buttons a {
@@ -55,26 +99,62 @@ form {
     border: none;
     cursor: pointer;
     display: inline-block; /* Keeps the buttons inline */
-    font-size: 1em; /* Ensures font size remains consistent */
+    font-size: 1em;
+    transition: all 0.3s ease; /* 动画效果 */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 添加阴影 */
+    border-radius: 30px; /* 圆角按钮 */
 }
 
 .checkout-btn:hover {
-    background-color: #45a049;
+    background-color: #307535;
 }
+
+.clear-btn {
+    background-color: #ff863d;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    display: inline-block; /* Keeps the buttons inline */
+    font-size: 1em;
+    transition: all 0.3s ease; /* 动画效果 */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 添加阴影 */
+    border-radius: 30px; /* 圆角按钮 */
+}
+
+.clear-btn:hover {
+    background-color: #dd5f11;
+}
+
 
 .remove-btn {
     background-color: red;
     color: white;
     border: none;
     cursor: pointer;
+    transition: all 0.3s ease; /* 动画效果 */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 添加阴影 */
+    border-radius: 30px; /* 圆角按钮 */
 }
 
 .remove-btn:hover {
-    background-color: darkred;
+    background-color: #5e4f4f;
 }
 
 .quantity-input {
     width: 60px;
     padding: 5px;
     text-align: center;
+}
+
+footer {
+    background-color: #65717a; /* 蓝色背景 */
+    color: white;
+    text-align: center;
+    padding: 20px;
+    position: absolute; /* 使footer固定在底部 */
+    bottom: 0;  /* 固定在页面底部 */
+    width: 100%;  /* 宽度100% */
+    left: 0;  /* 确保在页面内 */
+    box-shadow: 0 5px 50px rgba(0, 0, 0, 0.1);
 }

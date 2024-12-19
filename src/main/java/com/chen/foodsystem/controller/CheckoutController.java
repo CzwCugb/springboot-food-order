@@ -26,7 +26,7 @@ public class CheckoutController {
         model.addAttribute("userId", userID);
         model.addAttribute("totalPrice", CartController.getTotalPrice(CartItems));
         model.addAttribute("itemSum", CartController.getSumOfCartItems(CartItems));
-        return "checkout";
+        return "user/checkout";
     }
 
     @RequestMapping({"/checkout/{userID}/wechat","/checkout/{userID}/alipay"})
@@ -43,7 +43,7 @@ public class CheckoutController {
             orderService.createOrder(order);
         }
         cartService.removeAllCartItemByUserID(userID);
-        return "checkout";
+        return "user/checkout";
     }
 
 }

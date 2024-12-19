@@ -5,40 +5,65 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title th:text="${food.name}">食品详情</title>
   <link rel="stylesheet" href="/css/details.css">
+  <link rel="shortcut icon" href="/images/icons/favicon.ico"/>
+  <link rel="bookmark" href= "/images/icons/favicon.ico"/>
 </head>
 <body>
 
 <header>
+  <!-- Logo -->
   <div class="logo-container">
-    <h1>网上订餐系统</h1>
+    <img src="/images/icons/favicon.ico" alt="Logo" class="logo"/>
+  </div>
+  <h2>商品详情</h2>
+  <!-- 搜索框 -->
+
+  <div class="auth-buttons">
+    <a th:if="${session.loggedInUser}" th:href="@{/cart/{userID}(userID=${session.loggedInUser.userID})}">购物车</a>
+    <a th:if="${session.loggedInUser}" th:href="@{/userProfile/{userID}(userID=${session.loggedInUser.userID})}">个人信息</a>
+    <a th:if="${session.loggedInUser}" th:href="@{/home/{userID}(userID=${session.loggedInUser.userID})}">我的订单</a>
+    <a th:if="${session.loggedInUser}" th:href="@{/}">返回主页</a>
+    <a th:if="${session.loggedInUser}" th:href="@{/login/logout}">退出</a>
+    <a th:unless="${session.loggedInUser}" th:href="@{/login}">登录</a>
+    <a th:unless="${session.loggedInUser}" th:href="@{/register}">注册</a>
+    <a th:unless="${session.loggedInUser}" th:href="@{/}">返回主页</a>
   </div>
 </header>
 
 <!-- 商品详情区域 -->
-<section class="product-detail">
-  <div class="product-images">
-    <img th:src="@{'/images/food/' + ${food.image}}" alt="食品图片" class="main-img">
-  </div>
+<main>
+  <section class="product-detail">
+    <div class="product-frame">
+      <div class="product-images">
+        <img th:src="@{'/images/food/' + ${food.image}}" alt="食品图片" class="main-img">
+      </div>
 
-  <div class="product-info">
-    <h2 th:text="${food.name}">食品名称</h2>
-    <p class="price" th:text="'价格: ¥' + ${food.price}">价格: ¥XX.XX</p>
-    <p class="description" th:text="${food.description}">食品描述</p>
+      <div class="product-info">
+        <h2 th:text="${food.name}">食品名称</h2>
+        <p class="price" th:text="'价格: ¥' + ${food.price}">价格: ¥XX.XX</p>
+        <p class="description" th:text="${food.description}">食品描述</p>
 
-    <div class="add-to-cart">
-      <form th:if="${session.loggedInUser}" th:action="@{/cart/add/{userID}/{foodID}/{quantity}(foodID=${food.foodID}, userID=${session.loggedInUser.userID}, quantity=1)}" method="post">
-        <button type="submit" class="add-btn">加入购物车</button>
-      </form>
-      <form th:unless="${session.loggedInUser}" th:action="@{/login}" method="get">
-        <button type="submit" class="add-btn" style="background-color: gray">请先登录</button>
-      </form>
+        <div class="rating-buttons">
+          <button class="thumb-up">👍 赞</button>
+          <button class="thumb-down">👎 踩</button>
+        </div>
+
+        <div class="add-to-cart">
+          <form th:if="${session.loggedInUser}" th:action="@{/cart/add/{userID}/{foodID}/{quantity}(foodID=${food.foodID}, userID=${session.loggedInUser.userID}, quantity=1)}" method="post">
+            <button type="submit" class="add-btn">加入购物车</button>
+          </form>
+          <form th:unless="${session.loggedInUser}" th:action="@{/login}" method="get">
+            <button type="submit" class="add-btn" style="background-color: gray">请先登录</button>
+          </form>
+        </div>
+      </div>
     </div>
-  </div>
-</section>
+  </section>
+</main>
+</body>
 
 <footer>
   <p>&copy; 2024 网上订餐系统 | All Rights Reserved</p>
 </footer>
 
-</body>
 </html>

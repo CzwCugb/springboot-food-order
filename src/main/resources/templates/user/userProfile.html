@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>个人信息修改</title>
+    <link rel="stylesheet" th:href="@{/css/userProfile.css}">
+</head>
+<body>
+<header>
+    <img src="/images/icons/favicon.ico" class="logo">
+    <h2>个人信息</h2>
+    <div class="btn-home">
+        <a th:href="@{/}">返回首页</a>
+    </div>
+</header>
+<div class="container">
+    <!-- 显示修改成功或失败的消息 -->
+    <div th:if="${success}" style="color: green;">[[${success}]]</div>
+    <div th:if="${error}" style="color: red;">[[${error}]]</div>
+
+    <form th:action="@{/userProfile/update}" method="post" th:object="${user}">
+        <!-- 用户ID（不可编辑） -->
+        <div class="form-group">
+            <label for="userID">用户ID</label>
+            <input type="text" id="userID" th:field="*{userID}" readonly />
+        </div>
+
+        <!-- 用户名 -->
+        <div class="form-group">
+            <label for="username">用户名</label>
+            <input type="text" id="username" th:field="*{username}" required />
+        </div>
+
+        <!-- 密码 -->
+        <div class="form-group">
+            <label for="password">密码</label>
+            <input type="password" id="password" th:field="*{password}" required />
+        </div>
+
+        <!-- 邮箱 -->
+        <div class="form-group">
+            <label for="email">邮箱</label>
+            <input type="email" id="email" th:field="*{email}" required />
+        </div>
+
+        <!-- 电话 -->
+        <div class="form-group">
+            <label for="phone">电话</label>
+            <input type="tel" id="phone" th:field="*{phone}" />
+        </div>
+
+        <!-- 角色（不可编辑） -->
+        <div class="form-group">
+            <label for="role">角色</label>
+            <input type="text" id="role" th:field="*{role}" readonly />
+        </div>
+
+        <!-- 创建时间（不可编辑） -->
+        <div class="form-group">
+            <label for="createdAt">创建时间</label>
+            <input type="text" id="createdAt" th:field="*{createdAt}" readonly />
+        </div>
+
+        <!-- 提交按钮 -->
+        <div class="form-group">
+            <button type="submit">保存修改</button>
+        </div>
+    </form>
+</div>
+
+<!-- 底部 -->
+<footer>
+    <p>&copy; 2024 网上订餐系统 - All Rights Reserved.</p>
+</footer>
+
+</body>
+</html>

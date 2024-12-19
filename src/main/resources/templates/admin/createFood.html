@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>添加菜品</title>
+    <link rel="stylesheet" href="/css/createfood.css">
+</head>
+<body>
+<div class="container">
+    <header>
+        <h1>添加菜品</h1>
+        <nav>
+            <a href="/admin/food">菜品管理</a>
+            <a href="/admin/user">用户管理</a>
+            <a href="/admin/order">订单管理</a>
+        </nav>
+    </header>
+
+    <main>
+        <form th:action="@{/admin/food/create}" method="post">
+            <div class="form-group">
+                <label for="name">名称</label>
+                <input type="text" id="name" name="name" placeholder="输入菜品名称" required>
+            </div>
+
+            <div class="form-group">
+                <label for="description">描述</label>
+                <textarea id="description" name="description" placeholder="输入菜品描述" required></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="price">价格</label>
+                <input type="number" id="price" name="price" step="0.01" placeholder="输入菜品价格" required>
+            </div>
+
+            <div class="form-group">
+                <label for="image">图片路径</label>
+                <input type="text" id="image" name="image" placeholder="输入图片路径">
+            </div>
+
+            <div class="form-group">
+                <label for="available">状态</label>
+                <select id="available" name="available">
+                    <option value="true">可用</option>
+                    <option value="false">不可用</option>
+                </select>
+            </div>
+
+            <div class="form-actions">
+                <button type="submit" class="btn-save">保存</button>
+                <a href="/admin/food" class="btn-cancel">取消</a>
+            </div>
+        </form>
+    </main>
+</div>
+</body>
+</html>

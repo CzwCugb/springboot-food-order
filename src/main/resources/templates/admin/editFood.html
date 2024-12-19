@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>编辑菜品</title>
+    <link rel="stylesheet" href="/css/editfood.css">
+</head>
+<body>
+<div class="container">
+    <header>
+        <h1>编辑菜品</h1>
+        <nav>
+            <a href="/admin/food">菜品管理</a>
+            <a href="/admin/user">用户管理</a>
+            <a href="/admin/order">订单管理</a>
+        </nav>
+    </header>
+
+    <main>
+        <form th:action="@{/admin/food/edit}" method="post">
+            <input type="hidden" name="foodID" th:value="${food.foodID}">
+            <div class="form-group">
+                <label for="name">名称</label>
+                <input type="text" id="name" name="name" th:value="${food.name}" required>
+            </div>
+            <div class="form-group">
+                <label for="description">描述</label>
+                <textarea id="description" name="description" required th:text="${food.description}"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="price">价格</label>
+                <input type="number" id="price" name="price" step="0.01" th:value="${food.price}" required>
+            </div>
+            <div class="form-group">
+                <label for="image">图片路径</label>
+                <input type="text" id="image" name="image" th:value="${food.image}">
+            </div>
+            <div class="form-group">
+                <label for="available">状态</label>
+                <select id="available" name="available">
+                    <option th:value="true" th:selected="${food.available == true}">可用</option>
+                    <option th:value="false" th:selected="${food.available == false}">不可用</option>
+                </select>
+            </div>
+            <div class="form-actions">
+                <button type="submit" class="btn-save">保存</button>
+                <a href="/admin/food" class="btn-cancel">取消</a>
+            </div>
+        </form>
+    </main>
+</div>
+</body>
+</html>

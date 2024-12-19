@@ -16,18 +16,36 @@ public class FoodService {
     @Autowired
     private FoodMapper foodMapper;
 
-    // 获取所有食品
+    // 查找全部食物 不分页
     public List<Food> getAllFoods() {
         return foodMapper.findAllFoods();
     }
 
-    // 获取分页的食品列表
+    // 查找全部食物 分页
     public PageInfo<Food> getAllFoodPages(int pageNum, int pageSize) {
         // 使用 PageHelper 来设置分页参数
         PageHelper.startPage(pageNum, pageSize);
         List<Food> foodList = foodMapper.findAllFoodPages();
         return new PageInfo<>(foodList);  // 返回分页结果
     }
+
+    // 通过名字模糊查找食物 不分页
+    public List<Food> searchFoodByName(String name) {
+        return foodMapper.findFoodByName(name);
+    }
+
+    // 通过名字模糊查找食物 分页
+    public PageInfo<Food> searchFoodPagesByName(int pageNum, int pageSize, String name) {
+        PageHelper.startPage(pageNum, pageSize);
+        List<Food> foodList = foodMapper.findFoodPagesByFoodName(name);
+        return new PageInfo<>(foodList);  // 返回分页结果
+    }
+
+
+    public List<Food> getFoodsByFoodName(String foodName) {
+        return foodMapper.findFoodsByFoodName(foodName);
+    }
+
 
 
     // 根据ID获取单个食品
@@ -49,4 +67,6 @@ public class FoodService {
     public void deleteFood(int foodID) {
         foodMapper.deleteFood(foodID);
     }
+
+
 }

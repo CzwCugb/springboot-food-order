@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>用户管理</title>
+    <link rel="stylesheet" href="/css/adminuser.css">
+</head>
+<body>
+<div class="container">
+    <header class="top-header">
+        <span>网上订餐系统：管理端</span>
+    </header>
+
+    <header>
+        <h1>用户管理</h1>
+        <nav>
+            <a href="/admin/food">菜品管理</a>
+            <a href="/admin/user" class="active">用户管理</a>
+            <a href="/admin/order">订单管理</a>
+            <a href="/login/logout" class="btn-logout">退出</a>
+        </nav>
+    </header>
+    <div class="actions">
+        <!-- 用户搜索表单 -->
+        <form action="/admin/user/search/1" method="get">
+            <input type="text" name="username" placeholder="输入用户名" th:value="${searchName}" required>
+            <button type="submit">搜索</button>
+            <button type="button" onclick="location.href='/admin/user'">重置</button>
+        </form>
+    </div>
+    <main>
+        <table>
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>用户名</th>
+                <th>密码</th>
+                <th>邮箱</th>
+                <th>电话</th>
+                <th>角色</th>
+                <th>创建时间</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:if = "${userPage.list} "th:each="user : ${userPage.list}">
+                <td th:text="${user.userID}"></td>
+                <td th:text="${user.username}"></td>
+                <td th:text="${user.password}"></td> <!-- 显示密码 -->
+                <td th:text="${user.email}"></td>
+                <td th:text="${user.phone}"></td>
+                <td th:text="${user.role == 'USER' ? 'Customer' : (user.role == 'ADMIN' ? 'Admin' : user.role)}"></td>
+                <td th:text="${user.createdAt}"></td>
+                <td>
+                    <a th:href="@{/admin/user/edit/{id}(id=${user.userID})}" class="btn-edit">修改</a>
+                    <a th:href="@{/admin/user/delete/{id}(id=${user.userID})}" onclick="return confirm('确认删除吗？');" class="btn-delete">删除</a>
+                </td>
+            </tr>
+            <tr th:if="${userPage.list.isEmpty()}">
+                <td colspan="8">未找到匹配的用户</td>
+            </tr>
+            </tbody>
+        </table>
+    </main>
+
+    <div class="pagination">
+        <!-- 上一页按钮 -->
+        <span th:if="${userPage.pageNum > 1}">
+        <a th:href="@{'/admin/user/'+ ${userPage.prePage}}" class="prev-page">上一页</a>
+    </span>
+        <span th:if="${userPage.pageNum == 1}">
+        <span class="prev-page disabled">上一页</span>
+    </span>
+
+        <!-- 页码按钮 -->
+        <span th:each="i : ${#numbers.sequence(1, userPage.pages)}">
+        <a th:href="@{'/admin/user/' + ${i}}" th:text="${i}" th:classappend="${userPage.pageNum == i ? 'active' : ''}"></a>
+    </span>
+
+        <!-- 下一页按钮 -->
+        <span th:if="${userPage.pageNum < userPage.pages}">
+        <a th:href="@{'/admin/user/'+ ${userPage.nextPage}}" class="next-page">下一页</a>
+    </span>
+        <span th:if="${userPage.pageNum == userPage.pages}">
+        <span class="next-page disabled">下一页</span>
+    </span>
+    </div>
+</div>
+
+
+
+</body>
+</html>

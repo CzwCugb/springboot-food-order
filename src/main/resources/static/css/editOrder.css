@@ -1,0 +1,132 @@
+/* 全局样式 */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
+    margin: 0;
+    padding: 0;
+    color: #333;
+}
+
+.container {
+    max-width: 500px;
+    margin: 40px auto;
+    padding: 20px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* 顶部栏样式 */
+header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+header h1 {
+    background-color: #0d71c3; /* 蓝色背景 */
+    color: white;
+    padding: 15px;
+    border-radius: 8px;
+    margin: 0;
+    font-size: 24px;
+}
+
+/* 导航栏样式 */
+nav {
+    text-align: center;
+    margin-top: 15px;
+}
+
+nav a {
+    text-decoration: none;
+    color: #007bff;
+    font-size: 16px;
+    margin: 0 15px;
+    padding: 8px 15px;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+nav a:hover {
+    background-color: #007bff;
+    color: white;
+}
+
+nav a.active {
+    background-color: #0056b3;
+    color: white;
+    font-weight: bold;
+}
+
+/* 表单区域 */
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group {
+    margin-bottom: 15px; /* 缩小表单之间的间距 */
+    box-sizing: border-box; /* 确保宽度包含边框和内边距 */
+}
+.form-group label {
+    display: block;
+    font-size: 17px;
+    font-weight: bold;
+    color: #555;
+    margin-bottom: 8px;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 95%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 15.5px;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+/* 文本域 */
+textarea {
+    min-height: 100px;
+}
+
+/* 按钮样式 */
+.form-actions {
+    display: flex;
+    justify-content: space-between;
+}
+
+.btn-save,
+.btn-cancel {
+    padding: 10px 20px;
+    border-radius: 6px;
+    font-size: 16px;
+    text-decoration: none;
+    color: white;
+    text-align: center;
+    display: inline-block;
+}
+
+.btn-save {
+    background-color: #28a745; /* 绿色 */
+}
+
+.btn-save:hover {
+    background-color: #218838;
+}
+
+.btn-cancel {
+    background-color: #dc3545; /* 红色 */
+}
+
+.btn-cancel:hover {
+    background-color: #c82333;
+}

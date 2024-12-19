@@ -1,0 +1,224 @@
+/* 全局样式 */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
+    margin: 0;
+    padding: 0;
+    color: #333;
+}
+
+.container {
+    max-width: 1200px;
+    margin: auto;
+    padding: 20px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* 顶部条样式 */
+.top-header {
+    width: 100%;
+    background: linear-gradient(to right, #79b1e8, #125aa5); /* 从浅蓝到深蓝的渐变 */
+    color: white;               /* 字体颜色 */
+    padding: 10px 20px;         /* 上下左右内边距 */
+    font-size: 18px;            /* 字体大小 */
+    text-align: left;           /* 文字左对齐 */
+    font-weight: bold;          /* 字体加粗 */
+    position: fixed;            /* 固定在页面顶部 */
+    top: 0;                     /* 距离页面顶部0px */
+    left: 0;                    /* 距离页面左侧0px */
+    right: 0;                   /* 距离页面右侧0px */
+    z-index: 9999;              /* 确保它位于最上层 */
+}
+
+/* 给内容区添加一些上边距，使顶部条不遮挡内容 */
+body {
+    margin-top: 40px; /* 给页面内容区添加上边距 */
+}
+/* 头部样式 */
+header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* 标题样式 */
+header h1 {
+    background-color: #0d71c3; /* 蓝色背景 */
+    color: white; /* 白色文字 */
+    padding: 20px;
+    border-radius: 8px; /* 圆角 */
+    text-align: center; /* 文字居中 */
+    margin: 0; /* 去掉默认的外边距 */
+    font-size: 24px;
+}
+
+
+nav {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    padding: 10px;
+    background-color: #e9ecef;
+    border-radius: 4px;
+}
+
+nav a {
+    text-decoration: none;
+    color: #007bff;
+    font-size: 16px;
+    padding: 8px 15px;
+    border-radius: 4px;
+    transition: all 0.3s;
+}
+
+nav a:hover {
+    background-color: #007bff;
+    color: white;
+}
+
+nav a.active {
+    background-color: #0056b3;
+    color: white;
+    font-weight: bold;
+}
+
+/* 动作区域 */
+.actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.actions form {
+    display: flex;
+    gap: 10px;
+}
+
+.actions input[type="text"] {
+    padding: 8px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    font-size: 14px;
+    width: 250px;
+}
+
+.actions button {
+    padding: 8px 15px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.actions button:hover {
+    background-color: #0056b3;
+}
+
+/* 表格样式 */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+table th, table td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: center;
+}
+
+table th {
+    background-color: #f1f1f1;
+    font-weight: bold;
+    color: #333;
+}
+
+table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+table tr:hover {
+    background-color: #f0f8ff;
+}
+
+table td img {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+/* 按钮样式 */
+.btn-edit, .btn-delete {
+    display: inline-block;
+    padding: 8px 12px;
+    text-decoration: none;
+    color: white;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+    margin: 5px 0;
+}
+
+.btn-edit {
+    background-color: #28a745;
+}
+
+.btn-edit:hover {
+    background-color: #218838;
+}
+
+.btn-delete {
+    background-color: #dc3545;
+}
+
+.btn-delete:hover {
+    background-color: #c82333;
+}
+
+/* 分页样式 */
+.pagination {
+    text-align: center;
+    margin-top: 20px;
+}
+
+/* 分页按钮 */
+.pagination a {
+    display: inline-block;
+    margin: 0 5px;
+    padding: 8px 16px;
+    text-decoration: none;
+    color: #007bff;
+    background-color: #f8f9fa;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+    font-size: 14px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* 激活状态分页按钮 */
+.pagination a.active {
+    background-color: #007bff;
+    color: white;
+    border-color: #007bff;
+}
+
+/* 鼠标悬停效果 */
+.pagination a:hover {
+    background-color: #0056b3;
+    color: white;
+    border-color: #0056b3;
+}
+
+.pagination .disabled {
+    background-color: #ffffff;  /* 灰色背景 */
+    color: #8a8a8a;             /* 灰色文字 */
+    text-align: center;         /* 水平居中 */
+    line-height: 36px;          /* 垂直居中 */
+}
+

@@ -2,7 +2,7 @@
 
 ## 工具 & 框架
 
-开发环境：IDEA Utilmate 2025.2.3
+开发环境：IDEA Utilmate 2024.2.3
 
 框架：SpringBoot
 
@@ -10,87 +10,21 @@
 
 前端：Vue.js
 
-## MAVEN依赖
-
-```xml
-<properties>
-    <java.version>23</java.version>
-</properties>
-
-<dependencies>
-    <dependency>
-        <groupId>org.mybatis.spring.boot</groupId>
-        <artifactId>mybatis-spring-boot-starter</artifactId>
-        <version>3.0.3</version>
-    </dependency>
-
-    <dependency>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-web</artifactId>
-    </dependency>
-
-    <dependency>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-devtools</artifactId>
-        <scope>runtime</scope>
-        <optional>true</optional>
-    </dependency>
-    <dependency>
-        <groupId>com.mysql</groupId>
-        <artifactId>mysql-connector-j</artifactId>
-        <scope>runtime</scope>
-    </dependency>
-    <dependency>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-configuration-processor</artifactId>
-        <optional>true</optional>
-    </dependency>
-    <dependency>
-        <groupId>org.projectlombok</groupId>
-        <artifactId>lombok</artifactId>
-        <optional>true</optional>
-    </dependency>
-    <dependency>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-test</artifactId>
-        <scope>test</scope>
-    </dependency>
-
-    <dependency>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-thymeleaf</artifactId>
-    </dependency>
-
-    <dependency>
-        <groupId>org.thymeleaf</groupId>
-        <artifactId>thymeleaf</artifactId>
-        <version>3.1.2.RELEASE</version>
-    </dependency>
-
-    <dependency>
-        <groupId>org.thymeleaf.extras</groupId>
-        <artifactId>thymeleaf-extras-java8time</artifactId>
-        <version>3.0.4.RELEASE</version>
-    </dependency>
-</dependencies>
-
-```
-
 ## 功能 | 计划表
 
-1：SpringBoot基础框架搭建 -- 12.13 --  Finish
+1：SpringBoot基础框架搭建 -- 2024.12.13 --  Finish
 
-2：数据库建表、Mybatis语句 -- 12.14 -- Finish
+2：数据库建表、Mybatis语句 -- 2024.12.13 -- Finish
 
-3：登录、注册（Ajax验证）-- TODO
+3：登录、注册（Ajax验证）-- 2024.12.15 -- Finish
 
-4：展示页（show.html） -- TODO
+4：首页（index.html） -- 2024.12.15 -- Finish
 
-5：详情页（details.html） -- TODO
+5：详情页（details.html） -- 2024.12.15 -- Finish
 
-6：购物车（cart.html） -- TODO
+6：购物车（cart.html） -- 2024.12.16 -- Finish
 
-7：微信/支付宝支付 -- TODO
+7：微信/支付宝支付 -- 2024.12.16 -- Finish
 
-8：Vue框架重构网页 -- TODO
+8：管理员增删改查 -- 2024.12.17 -- Finish
 

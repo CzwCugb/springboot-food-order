@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>订单管理</title>
+  <link rel="stylesheet" href="/css/adminorder.css">
+</head>
+<body>
+<div class="container">
+  <header class="top-header">
+    <span>网上订餐系统：管理端</span>
+  </header>
+
+  <!-- 页面头部 -->
+  <header>
+    <h1>订单管理</h1>
+    <nav>
+      <a href="/admin/food">菜品管理</a>
+      <a href="/admin/user">用户管理</a>
+      <a href="/admin/order" class="active">订单管理</a>
+      <a href="/login/logout" class="btn-logout">退出</a>
+    </nav>
+  </header>
+
+  <div class="actions">
+    <!-- 用户名搜索表单 -->
+    <form action="/admin/order/search/1" method="get">
+      <input type="text" name="username" placeholder="输入用户名" th:value="${searchName}" required>
+      <button type="submit">搜索</button>
+      <button type="button" onclick="location.href='/admin/order'">重置</button>
+    </form>
+  </div>
+  <!-- 页面主体 -->
+  <main>
+    <!-- 订单信息表格 -->
+    <table>
+      <thead>
+      <tr>
+        <th>订单ID</th>
+        <th>菜品名称</th>
+        <th>数量</th>
+        <th>价格</th>
+        <th>订单日期</th>
+        <th>状态</th>
+        <th>用户名</th>
+        <th>操作</th>
+      </tr>
+      </thead>
+      <tbody>
+      <!-- 遍历订单信息 -->
+      <tr th:if = "${orderPage.list} "th:each="order : ${orderPage.list}">
+        <td th:text="${order.orderId}"></td>
+        <td th:text="${order.foodName}"></td>
+        <td th:text="${order.quantity}"></td>
+        <td th:text="${order.price}"></td>
+        <td th:text="${#dates.format(order.orderdate, 'yyyy-MM-dd HH:mm')}"></td>
+        <td th:text="${order.status}"></td>
+        <td th:text="${order.userName}"></td> <!-- 显示用户名 -->
+        <td>
+          <a th:href="@{/admin/order/edit/{id}(id=${order.orderId})}" class="btn-edit">修改</a>
+          <a th:href="@{/admin/order/delete/{id}(id=${order.orderId})}" onclick="return confirm('确认删除此订单吗？');" class="btn-delete">删除</a>
+        </td>
+      </tr>
+      <tr th:if="${orderPage.list.isEmpty()}">
+        <td colspan="8">未找到匹配的订单</td>
+      </tr>
+      </tbody>
+    </table>
+  </main>
+  <div class="pagination">
+    <!-- 上一页按钮 -->
+    <span th:if="${orderPage.pageNum > 1}">
+        <a th:href="@{'/admin/order/'+ ${orderPage.prePage}}" class="prev-page">上一页</a>
+    </span>
+    <span th:if="${orderPage.pageNum == 1}">
+        <span class="prev-page disabled">上一页</span>
+    </span>
+
+    <!-- 页码按钮 -->
+    <span th:each="i : ${#numbers.sequence(1, orderPage.pages)}">
+        <a th:href="@{'/admin/order/' + ${i}}" th:text="${i}" th:classappend="${orderPage.pageNum == i ? 'active' : ''}"></a>
+    </span>
+
+    <!-- 下一页按钮 -->
+    <span th:if="${orderPage.pageNum < orderPage.pages}">
+        <a th:href="@{'/admin/order/'+ ${orderPage.nextPage}}" class="next-page">下一页</a>
+    </span>
+    <span th:if="${orderPage.pageNum == orderPage.pages}">
+        <span class="next-page disabled">下一页</span>
+    </span>
+  </div>
+</div>
+
+
+
+
+</body>
+</html>
